@@ -7,3 +7,12 @@ C:\Users\stefan.lenders.CLF\documents\visual studio 2015\Projects\Radius Log Bro
 C:\Users\stefan.lenders.CLF\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Release\Radius Log Browser.csproj.GenerateResource.Cache
 C:\Users\stefan.lenders.CLF\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Release\Radius Log Browser.exe
 C:\Users\stefan.lenders.CLF\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Release\Radius Log Browser.pdb
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\bin\Release\Radius Log Browser.exe.config
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\bin\Release\Radius Log Browser.exe
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\bin\Release\Radius Log Browser.pdb
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius_Log_Browser.Form1.resources
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius_Log_Browser.help.resources
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius_Log_Browser.Properties.Resources.resources
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.csproj.GenerateResource.Cache
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.exe
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.pdb

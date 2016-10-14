@@ -32,15 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataSet1 = new System.Data.DataSet();
             this.lvLogTable = new System.Windows.Forms.ListView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.loadFromAD001ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadFromAD002ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +63,13 @@
             this.lvLogTable.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvLogTable_ColumnClick);
             this.lvLogTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvLogTable_KeyDown);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "1476368477_BT_sort_az.png");
+            this.imageList1.Images.SetKeyName(1, "1476368485_BT_sort_za.png");
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -81,10 +85,7 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectFileToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.loadFromAD001ToolStripMenuItem,
-            this.loadFromAD002ToolStripMenuItem});
+            this.selectFileToolStripMenuItem});
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
             this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.loadFileToolStripMenuItem.Text = "Load";
@@ -92,28 +93,9 @@
             // selectFileToolStripMenuItem
             // 
             this.selectFileToolStripMenuItem.Name = "selectFileToolStripMenuItem";
-            this.selectFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.selectFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.selectFileToolStripMenuItem.Text = "Select File";
             this.selectFileToolStripMenuItem.Click += new System.EventHandler(this.selectFileToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
-            // 
-            // loadFromAD001ToolStripMenuItem
-            // 
-            this.loadFromAD001ToolStripMenuItem.Name = "loadFromAD001ToolStripMenuItem";
-            this.loadFromAD001ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.loadFromAD001ToolStripMenuItem.Text = "Load from AD001";
-            this.loadFromAD001ToolStripMenuItem.Click += new System.EventHandler(this.loadFromAD001ToolStripMenuItem_Click);
-            // 
-            // loadFromAD002ToolStripMenuItem
-            // 
-            this.loadFromAD002ToolStripMenuItem.Name = "loadFromAD002ToolStripMenuItem";
-            this.loadFromAD002ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.loadFromAD002ToolStripMenuItem.Text = "Load from AD002";
-            this.loadFromAD002ToolStripMenuItem.Click += new System.EventHandler(this.loadFromAD002ToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -129,13 +111,6 @@
             this.howToUseToolStripMenuItem.Name = "howToUseToolStripMenuItem";
             this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.howToUseToolStripMenuItem_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "1476368477_BT_sort_az.png");
-            this.imageList1.Images.SetKeyName(1, "1476368485_BT_sort_za.png");
             // 
             // Form1
             // 
@@ -165,10 +140,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem howToUseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadFromAD001ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadFromAD002ToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList1;
     }
 }

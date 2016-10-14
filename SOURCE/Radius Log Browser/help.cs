@@ -17,5 +17,10 @@ namespace Radius_Log_Browser
         {
             InitializeComponent();
         }
+
+        private void lbVersion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
