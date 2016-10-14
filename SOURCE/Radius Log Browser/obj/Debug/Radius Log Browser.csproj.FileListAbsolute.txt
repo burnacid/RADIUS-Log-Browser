@@ -17,3 +17,4 @@ C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Lo
 C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.csproj.GenerateResource.Cache
 C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.exe
 C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.pdb
+C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.csprojResolveAssemblyReference.cache

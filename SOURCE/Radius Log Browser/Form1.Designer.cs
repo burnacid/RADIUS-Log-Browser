@@ -38,8 +38,15 @@
             this.selectFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmSearchSep = new System.Windows.Forms.ToolStripSeparator();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmRemoveSearch = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSet1
@@ -52,6 +59,7 @@
             this.lvLogTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvLogTable.ContextMenuStrip = this.contextMenuStrip1;
             this.lvLogTable.FullRowSelect = true;
             this.lvLogTable.Location = new System.Drawing.Point(12, 27);
             this.lvLogTable.Name = "lvLogTable";
@@ -61,7 +69,10 @@
             this.lvLogTable.UseCompatibleStateImageBehavior = false;
             this.lvLogTable.View = System.Windows.Forms.View.Details;
             this.lvLogTable.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvLogTable_ColumnClick);
+            this.lvLogTable.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvLogTable_ItemSelectionChanged);
             this.lvLogTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvLogTable_KeyDown);
+            this.lvLogTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvLogTable_MouseDown);
+            this.lvLogTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvLogTable_MouseMove);
             // 
             // imageList1
             // 
@@ -112,6 +123,54 @@
             this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.howToUseToolStripMenuItem_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmSearch,
+            this.cmRemoveSearch,
+            this.cmSearchSep,
+            this.cmCopy,
+            this.clearToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 120);
+            // 
+            // cmCopy
+            // 
+            this.cmCopy.Enabled = false;
+            this.cmCopy.Name = "cmCopy";
+            this.cmCopy.ShortcutKeyDisplayString = "Ctrl+C";
+            this.cmCopy.Size = new System.Drawing.Size(154, 22);
+            this.cmCopy.Text = "Copy";
+            this.cmCopy.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // cmSearch
+            // 
+            this.cmSearch.Name = "cmSearch";
+            this.cmSearch.Size = new System.Drawing.Size(154, 22);
+            this.cmSearch.Text = "Search on";
+            this.cmSearch.Visible = false;
+            this.cmSearch.Click += new System.EventHandler(this.cmSearch_Click);
+            // 
+            // cmSearchSep
+            // 
+            this.cmSearchSep.Name = "cmSearchSep";
+            this.cmSearchSep.Size = new System.Drawing.Size(151, 6);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
+            // cmRemoveSearch
+            // 
+            this.cmRemoveSearch.Name = "cmRemoveSearch";
+            this.cmRemoveSearch.Size = new System.Drawing.Size(154, 22);
+            this.cmRemoveSearch.Text = "Remove search";
+            this.cmRemoveSearch.Visible = false;
+            this.cmRemoveSearch.Click += new System.EventHandler(this.cmRemoveSearch_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,6 +202,12 @@
         private System.Windows.Forms.ToolStripMenuItem selectFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem howToUseToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cmCopy;
+        private System.Windows.Forms.ToolStripMenuItem cmSearch;
+        private System.Windows.Forms.ToolStripSeparator cmSearchSep;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmRemoveSearch;
     }
 }
 
