@@ -10,3 +10,4 @@ Easy way to read a NPS DTS format log file
 * Ability to sort different columns
 * Ability to multi select copy rows to anywhere (CTRL + C)
 * Ability to export the logfile to MS Excel
+* Search/Filter on text
