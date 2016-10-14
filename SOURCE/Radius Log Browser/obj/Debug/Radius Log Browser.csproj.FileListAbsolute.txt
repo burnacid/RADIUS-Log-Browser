@@ -1,0 +1,10 @@
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\bin\Debug\Radius Log Browser.exe.config
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\bin\Debug\Radius Log Browser.exe
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\bin\Debug\Radius Log Browser.pdb
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius Log Browser.csprojResolveAssemblyReference.cache
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius_Log_Browser.Form1.resources
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius_Log_Browser.Properties.Resources.resources
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius Log Browser.csproj.GenerateResource.Cache
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius Log Browser.exe
+c:\users\stefan.lenders.clf\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius Log Browser.pdb
+C:\Users\stefan.lenders.CLF\documents\visual studio 2015\Projects\Radius Log Browser\Radius Log Browser\obj\Debug\Radius_Log_Browser.help.resources
