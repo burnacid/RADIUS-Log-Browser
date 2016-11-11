@@ -180,7 +180,19 @@ namespace Radius_Log_Browser
             requestType = requestXML.Element("Packet-Type").Value;
             server = requestXML.Element("Computer-Name").Value;
             accessPointIP = requestXML.Element("Client-IP-Address").Value;
-            samAccountName = requestXML.Element("SAM-Account-Name").Value;
+
+            if (requestXML.Elements("SAM-Account-Name").Any()){
+                samAccountName = requestXML.Element("SAM-Account-Name").Value;
+            }
+            else if (requestXML.Elements("User-Name").Any())
+            {
+                samAccountName = requestXML.Element("User-Name").Value;
+            }
+            else
+            {
+                samAccountName = "- UNKNOWN -";
+            }
+
             classIdentifier = requestXML.Element("Class").Value;
         }
 

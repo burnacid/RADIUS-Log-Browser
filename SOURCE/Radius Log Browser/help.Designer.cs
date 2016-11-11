@@ -109,7 +109,7 @@
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(37, 13);
             this.lbVersion.TabIndex = 0;
-            this.lbVersion.Text = "v1.6.0";
+            this.lbVersion.Text = "v1.6.1";
             this.lbVersion.Click += new System.EventHandler(this.lbVersion_Click);
             // 
             // label2
