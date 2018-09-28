@@ -25,6 +25,11 @@ namespace Radius_Log_Browser
         private Dictionary<int, ListViewItem> oldItems = new Dictionary<int, ListViewItem>();
         private Dictionary<int, ListViewItem> newItems = new Dictionary<int, ListViewItem>();
 
+        private IEnumerable<string> newLines;
+        private int ReadLinesCount = 0;
+        private string Directory;
+        private string FileName;
+
         public Form1()
         {
             InitializeComponent();
@@ -49,9 +54,9 @@ namespace Radius_Log_Browser
 
         private void procesLogFile()
         {
-            lvLogTable.Items.Clear();
+            string lines = String.Join("\n", newLines);
 
-            XDocument doc = XDocument.Parse("<events>"+file+"</events>");
+            XDocument doc = XDocument.Parse("<events>"+ lines + "</events>");
             string classID;
 
             foreach (var events in doc.Descendants("Event"))
@@ -62,6 +67,24 @@ namespace Radius_Log_Browser
                 if (requests.ContainsKey(classID))
                 {
                     requests[classID].setResponce(events);
+
+                    ListViewItem item = new ListViewItem(new string[]
+                    {
+                        requests[classID].timestamp,
+                        requests[classID].getRequestType(),
+                        requests[classID].server,
+                        requests[classID].accessPointIP,
+                        requests[classID].accessPointName,
+                        requests[classID].requesterMacAddress,
+                        requests[classID].samAccountName,
+                        requests[classID].getResponceType(),
+                        requests[classID].getReason()
+                    });
+
+                    item.BackColor = requests[classID].getRowColor();
+
+                    this.Invoke(new MethodInvoker(delegate { lvLogTable.Items.Add(item); }));
+                    
                 }
                 else
                 {
@@ -70,6 +93,7 @@ namespace Radius_Log_Browser
                     
             }
 
+            /*
             foreach(RadiusRequest request in requests.Values)
             {
                 ListViewItem item = new ListViewItem(new string[]
@@ -91,9 +115,7 @@ namespace Radius_Log_Browser
 
                 lvLogTable.Items.Add(item);
             }
-
-            lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            */
         }
 
         private void filterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,7 +170,25 @@ namespace Radius_Log_Browser
 
         private void selectFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            loadFile();
+            if (ofdFile.ShowDialog() == DialogResult.OK)
+            {
+                lvLogTable.Items.Clear();
+
+                Directory = Path.GetDirectoryName(ofdFile.FileName);
+                FileName = Path.GetFileName(ofdFile.FileName);
+
+                int totalLines = File.ReadLines(ofdFile.FileName).Count();
+                int newLinesCount = totalLines - ReadLinesCount;
+                newLines = File.ReadLines(ofdFile.FileName).Skip(ReadLinesCount).Take(newLinesCount).ToArray();
+                ReadLinesCount = totalLines;
+                procesLogFile();
+                //WriteToTB();
+
+                lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                RunWatcher();
+            }
         }
 
         private void howToUseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,16 +198,7 @@ namespace Radius_Log_Browser
             helpdialog.ShowDialog();
         }
 
-        private void loadFromAD001ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            loadFile("\\\\file001\\data$\\Support\\ICT\\Log Files\\RADIUS\\AD001");
-        }
-
-        private void loadFromAD002ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            loadFile("\\\\file001\\data$\\Support\\ICT\\Log Files\\RADIUS\\AD002");
-        }
-
+        /*
         private void loadFile(string defaultPath = "")
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -190,6 +221,7 @@ namespace Radius_Log_Browser
 
             }
         }
+        */
 
         private void lvLogTable_KeyDown(object sender, KeyEventArgs e)
         {
@@ -376,5 +408,42 @@ namespace Radius_Log_Browser
 
             oldItems.Clear();
         }
+
+        public void RunWatcher()
+        {
+            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher.Path = Directory;
+            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            watcher.Filter = FileName;
+            watcher.Changed += new FileSystemEventHandler(OnChanged);
+            watcher.EnableRaisingEvents = true;
+
+        }
+
+
+        private void OnChanged(object source, FileSystemEventArgs e)
+        {
+            int totalLines = ReadLines(ofdFile.FileName).Count();
+            int newLinesCount = totalLines - ReadLinesCount;
+            newLines = ReadLines(ofdFile.FileName).Skip(ReadLinesCount).Take(newLinesCount).ToArray();
+            ReadLinesCount = totalLines;
+            procesLogFile();
+
+            //WriteToTB();
+        }
+
+        public static IEnumerable<string> ReadLines(string path)
+        {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 0x1000, FileOptions.SequentialScan))
+            using (var sr = new StreamReader(fs, Encoding.UTF8))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    yield return line;
+                }
+            }
+        }
+
     }
 }

@@ -80,9 +80,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(446, 49);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 13);
+            this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "CleanLease B.V.";
+            this.label6.Text = "Open Line B.V.";
             // 
             // label4
             // 
@@ -109,7 +109,7 @@
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(37, 13);
             this.lbVersion.TabIndex = 0;
-            this.lbVersion.Text = "v1.6.1";
+            this.lbVersion.Text = "v2.0.0";
             this.lbVersion.Click += new System.EventHandler(this.lbVersion_Click);
             // 
             // label2

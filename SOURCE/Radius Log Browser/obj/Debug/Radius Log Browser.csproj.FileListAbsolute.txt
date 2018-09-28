@@ -18,3 +18,14 @@ C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Lo
 C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.exe
 C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.pdb
 C:\Users\stefan.lenders.CLF\Documents\GitHub\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.csprojResolveAssemblyReference.cache
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\bin\Debug\Radius Log Browser.exe.config
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\bin\Debug\Radius Log Browser.exe
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\bin\Debug\Radius Log Browser.pdb
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.csprojAssemblyReference.cache
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius_Log_Browser.Form1.resources
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius_Log_Browser.help.resources
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius_Log_Browser.Properties.Resources.resources
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.csproj.GenerateResource.cache
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.csproj.CoreCompileInputs.cache
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.exe
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Debug\Radius Log Browser.pdb
