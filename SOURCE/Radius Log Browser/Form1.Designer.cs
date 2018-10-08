@@ -45,6 +45,9 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdFile = new System.Windows.Forms.OpenFileDialog();
+            this.cbScroll = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -145,10 +148,13 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectFileToolStripMenuItem});
+            this.selectFileToolStripMenuItem,
+            this.cbScroll,
+            this.toolStripSeparator1,
+            this.closeToolStripMenuItem});
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.loadFileToolStripMenuItem.Text = "Load";
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.loadFileToolStripMenuItem.Text = "File";
             // 
             // selectFileToolStripMenuItem
             // 
@@ -162,6 +168,7 @@
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.exportToolStripMenuItem.Text = "Export to Excel";
+            this.exportToolStripMenuItem.Visible = false;
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // howToUseToolStripMenuItem
@@ -176,6 +183,27 @@
             // 
             this.ofdFile.Filter = "Log files|*.log";
             this.ofdFile.Title = "Select a Radius Log";
+            // 
+            // cbScroll
+            // 
+            this.cbScroll.Checked = true;
+            this.cbScroll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbScroll.Name = "cbScroll";
+            this.cbScroll.Size = new System.Drawing.Size(180, 22);
+            this.cbScroll.Text = "Auto Scroll Down";
+            this.cbScroll.Click += new System.EventHandler(this.cbScroll_Click);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // Form1
             // 
@@ -215,6 +243,9 @@
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cmRemoveSearch;
         private System.Windows.Forms.OpenFileDialog ofdFile;
+        private System.Windows.Forms.ToolStripMenuItem cbScroll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
     }
 }
 

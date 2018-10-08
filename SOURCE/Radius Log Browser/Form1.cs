@@ -1,13 +1,8 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -15,7 +10,7 @@ namespace Radius_Log_Browser
 {
     public partial class Form1 : Form
     {
-        private String file;
+        private long currentPosition;
         private Dictionary<string, string> type = new Dictionary<string, string>();
         private Dictionary<string, string> reason = new Dictionary<string, string>();
         private Dictionary<string, RadiusRequest> requests = new Dictionary<string, RadiusRequest>();
@@ -25,8 +20,7 @@ namespace Radius_Log_Browser
         private Dictionary<int, ListViewItem> oldItems = new Dictionary<int, ListViewItem>();
         private Dictionary<int, ListViewItem> newItems = new Dictionary<int, ListViewItem>();
 
-        private IEnumerable<string> newLines;
-        private int ReadLinesCount = 0;
+        private string Lines;
         private string Directory;
         private string FileName;
 
@@ -54,9 +48,7 @@ namespace Radius_Log_Browser
 
         private void procesLogFile()
         {
-            string lines = String.Join("\n", newLines);
-
-            XDocument doc = XDocument.Parse("<events>"+ lines + "</events>");
+            XDocument doc = XDocument.Parse("<events>"+ Lines + "</events>");
             string classID;
 
             foreach (var events in doc.Descendants("Event"))
@@ -84,7 +76,10 @@ namespace Radius_Log_Browser
                     item.BackColor = requests[classID].getRowColor();
 
                     this.Invoke(new MethodInvoker(delegate { lvLogTable.Items.Add(item); }));
-                    
+                    if (cbScroll.Checked)
+                    {
+                        this.Invoke(new MethodInvoker(delegate { lvLogTable.Items[lvLogTable.Items.Count - 1].EnsureVisible(); }));
+                    }                    
                 }
                 else
                 {
@@ -92,30 +87,6 @@ namespace Radius_Log_Browser
                 }
                     
             }
-
-            /*
-            foreach(RadiusRequest request in requests.Values)
-            {
-                ListViewItem item = new ListViewItem(new string[]
-                    {
-                request.timestamp,
-                request.getRequestType(),
-                request.server,
-                request.accessPointIP,
-                request.accessPointName,
-                request.requesterMacAddress,
-                request.samAccountName,
-                request.getResponceType(),
-                request.getReason()
-                    });
-
-
-                item.BackColor = request.getRowColor();
-
-
-                lvLogTable.Items.Add(item);
-            }
-            */
         }
 
         private void filterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,16 +144,13 @@ namespace Radius_Log_Browser
             if (ofdFile.ShowDialog() == DialogResult.OK)
             {
                 lvLogTable.Items.Clear();
+                currentPosition = 0;
 
                 Directory = Path.GetDirectoryName(ofdFile.FileName);
                 FileName = Path.GetFileName(ofdFile.FileName);
 
-                int totalLines = File.ReadLines(ofdFile.FileName).Count();
-                int newLinesCount = totalLines - ReadLinesCount;
-                newLines = File.ReadLines(ofdFile.FileName).Skip(ReadLinesCount).Take(newLinesCount).ToArray();
-                ReadLinesCount = totalLines;
+                ReadLines(ofdFile.FileName);
                 procesLogFile();
-                //WriteToTB();
 
                 lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -197,31 +165,6 @@ namespace Radius_Log_Browser
             helpdialog.FormBorderStyle = FormBorderStyle.FixedSingle;
             helpdialog.ShowDialog();
         }
-
-        /*
-        private void loadFile(string defaultPath = "")
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Log files|*.log";
-            openFileDialog1.Title = "Select a Log File";
-            if(defaultPath != "")
-            {
-                openFileDialog1.InitialDirectory = defaultPath;
-            }
-
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                using (var sr = new StreamReader(fs))
-                {
-                    file = sr.ReadToEnd();
-                    sr.Close();
-                    procesLogFile();
-                }
-
-            }
-        }
-        */
 
         private void lvLogTable_KeyDown(object sender, KeyEventArgs e)
         {
@@ -423,27 +366,32 @@ namespace Radius_Log_Browser
 
         private void OnChanged(object source, FileSystemEventArgs e)
         {
-            int totalLines = ReadLines(ofdFile.FileName).Count();
-            int newLinesCount = totalLines - ReadLinesCount;
-            newLines = ReadLines(ofdFile.FileName).Skip(ReadLinesCount).Take(newLinesCount).ToArray();
-            ReadLinesCount = totalLines;
+            ReadLines(ofdFile.FileName);
             procesLogFile();
-
-            //WriteToTB();
         }
 
-        public static IEnumerable<string> ReadLines(string path)
+        public void ReadLines(string path)
         {
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 0x1000, FileOptions.SequentialScan))
-            using (var sr = new StreamReader(fs, Encoding.UTF8))
+        using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                stream.Seek(currentPosition, SeekOrigin.Begin);
+                using (StreamReader reader = new StreamReader(stream))
                 {
-                    yield return line;
+                    Lines = reader.ReadToEnd();
+
+                    currentPosition = stream.Position;
                 }
             }
         }
 
+        private void cbScroll_Click(object sender, EventArgs e)
+        {
+            cbScroll.Checked = !cbScroll.Checked;
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

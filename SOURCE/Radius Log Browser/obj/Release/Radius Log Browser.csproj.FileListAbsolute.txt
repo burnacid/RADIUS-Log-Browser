@@ -26,3 +26,4 @@ E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Brow
 E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.csproj.CoreCompileInputs.cache
 E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.exe
 E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.pdb
+E:\REPO\RADIUS-Log-Browser\SOURCE\Radius Log Browser\obj\Release\Radius Log Browser.csprojAssemblyReference.cache
