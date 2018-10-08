@@ -32,21 +32,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataSet1 = new System.Data.DataSet();
             this.lvLogTable = new System.Windows.Forms.ListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmRemoveSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmSearchSep = new System.Windows.Forms.ToolStripSeparator();
+            this.cmCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmSearchSep = new System.Windows.Forms.ToolStripSeparator();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmRemoveSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.ofdFile = new System.Windows.Forms.OpenFileDialog();
+            this.cbScroll = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSet1
@@ -74,6 +78,54 @@
             this.lvLogTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvLogTable_MouseDown);
             this.lvLogTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvLogTable_MouseMove);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmSearch,
+            this.cmRemoveSearch,
+            this.cmSearchSep,
+            this.cmCopy,
+            this.clearToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 98);
+            // 
+            // cmSearch
+            // 
+            this.cmSearch.Name = "cmSearch";
+            this.cmSearch.Size = new System.Drawing.Size(154, 22);
+            this.cmSearch.Text = "Search on";
+            this.cmSearch.Visible = false;
+            this.cmSearch.Click += new System.EventHandler(this.cmSearch_Click);
+            // 
+            // cmRemoveSearch
+            // 
+            this.cmRemoveSearch.Name = "cmRemoveSearch";
+            this.cmRemoveSearch.Size = new System.Drawing.Size(154, 22);
+            this.cmRemoveSearch.Text = "Remove search";
+            this.cmRemoveSearch.Visible = false;
+            this.cmRemoveSearch.Click += new System.EventHandler(this.cmRemoveSearch_Click);
+            // 
+            // cmSearchSep
+            // 
+            this.cmSearchSep.Name = "cmSearchSep";
+            this.cmSearchSep.Size = new System.Drawing.Size(151, 6);
+            // 
+            // cmCopy
+            // 
+            this.cmCopy.Enabled = false;
+            this.cmCopy.Name = "cmCopy";
+            this.cmCopy.ShortcutKeyDisplayString = "Ctrl+C";
+            this.cmCopy.Size = new System.Drawing.Size(154, 22);
+            this.cmCopy.Text = "Copy";
+            this.cmCopy.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -96,15 +148,18 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectFileToolStripMenuItem});
+            this.selectFileToolStripMenuItem,
+            this.cbScroll,
+            this.toolStripSeparator1,
+            this.closeToolStripMenuItem});
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.loadFileToolStripMenuItem.Text = "Load";
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.loadFileToolStripMenuItem.Text = "File";
             // 
             // selectFileToolStripMenuItem
             // 
             this.selectFileToolStripMenuItem.Name = "selectFileToolStripMenuItem";
-            this.selectFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.selectFileToolStripMenuItem.Text = "Select File";
             this.selectFileToolStripMenuItem.Click += new System.EventHandler(this.selectFileToolStripMenuItem_Click);
             // 
@@ -113,6 +168,7 @@
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.exportToolStripMenuItem.Text = "Export to Excel";
+            this.exportToolStripMenuItem.Visible = false;
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // howToUseToolStripMenuItem
@@ -123,53 +179,31 @@
             this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.howToUseToolStripMenuItem_Click);
             // 
-            // contextMenuStrip1
+            // ofdFile
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmSearch,
-            this.cmRemoveSearch,
-            this.cmSearchSep,
-            this.cmCopy,
-            this.clearToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 120);
+            this.ofdFile.Filter = "Log files|*.log";
+            this.ofdFile.Title = "Select a Radius Log";
             // 
-            // cmCopy
+            // cbScroll
             // 
-            this.cmCopy.Enabled = false;
-            this.cmCopy.Name = "cmCopy";
-            this.cmCopy.ShortcutKeyDisplayString = "Ctrl+C";
-            this.cmCopy.Size = new System.Drawing.Size(154, 22);
-            this.cmCopy.Text = "Copy";
-            this.cmCopy.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            this.cbScroll.Checked = true;
+            this.cbScroll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbScroll.Name = "cbScroll";
+            this.cbScroll.Size = new System.Drawing.Size(180, 22);
+            this.cbScroll.Text = "Auto Scroll Down";
+            this.cbScroll.Click += new System.EventHandler(this.cbScroll_Click);
             // 
-            // cmSearch
+            // closeToolStripMenuItem
             // 
-            this.cmSearch.Name = "cmSearch";
-            this.cmSearch.Size = new System.Drawing.Size(154, 22);
-            this.cmSearch.Text = "Search on";
-            this.cmSearch.Visible = false;
-            this.cmSearch.Click += new System.EventHandler(this.cmSearch_Click);
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // cmSearchSep
+            // toolStripSeparator1
             // 
-            this.cmSearchSep.Name = "cmSearchSep";
-            this.cmSearchSep.Size = new System.Drawing.Size(151, 6);
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.clearToolStripMenuItem.Text = "Clear";
-            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
-            // 
-            // cmRemoveSearch
-            // 
-            this.cmRemoveSearch.Name = "cmRemoveSearch";
-            this.cmRemoveSearch.Size = new System.Drawing.Size(154, 22);
-            this.cmRemoveSearch.Text = "Remove search";
-            this.cmRemoveSearch.Visible = false;
-            this.cmRemoveSearch.Click += new System.EventHandler(this.cmRemoveSearch_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // Form1
             // 
@@ -184,9 +218,9 @@
             this.Text = "RADIUS Log Browser";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,6 +242,10 @@
         private System.Windows.Forms.ToolStripSeparator cmSearchSep;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cmRemoveSearch;
+        private System.Windows.Forms.OpenFileDialog ofdFile;
+        private System.Windows.Forms.ToolStripMenuItem cbScroll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
     }
 }
 
