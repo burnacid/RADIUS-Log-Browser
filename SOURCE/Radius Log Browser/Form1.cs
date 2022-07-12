@@ -53,15 +53,18 @@ namespace Radius_Log_Browser
 
             foreach (var events in doc.Descendants("Event"))
             {
-                classID = events.Element("Class").Value;
-
-
-                if (requests.ContainsKey(classID))
+                XElement element = events.Element("Class");
+                if (element != null)
                 {
-                    requests[classID].setResponce(events);
+                    classID = element.Value;
 
-                    ListViewItem item = new ListViewItem(new string[]
+
+                    if (requests.ContainsKey(classID))
                     {
+                        requests[classID].setResponce(events);
+
+                        ListViewItem item = new ListViewItem(new string[]
+                        {
                         requests[classID].timestamp,
                         requests[classID].getRequestType(),
                         requests[classID].server,
@@ -71,19 +74,20 @@ namespace Radius_Log_Browser
                         requests[classID].samAccountName,
                         requests[classID].getResponceType(),
                         requests[classID].getReason()
-                    });
+                        });
 
-                    item.BackColor = requests[classID].getRowColor();
+                        item.BackColor = requests[classID].getRowColor();
 
-                    this.Invoke(new MethodInvoker(delegate { lvLogTable.Items.Add(item); }));
-                    if (cbScroll.Checked)
+                        this.Invoke(new MethodInvoker(delegate { lvLogTable.Items.Add(item); }));
+                        if (cbScroll.Checked)
+                        {
+                            this.Invoke(new MethodInvoker(delegate { lvLogTable.Items[lvLogTable.Items.Count - 1].EnsureVisible(); }));
+                        }
+                    }
+                    else
                     {
-                        this.Invoke(new MethodInvoker(delegate { lvLogTable.Items[lvLogTable.Items.Count - 1].EnsureVisible(); }));
-                    }                    
-                }
-                else
-                {
-                    requests[classID] = new RadiusRequest(events);
+                        requests[classID] = new RadiusRequest(events);
+                    }
                 }
                     
             }
