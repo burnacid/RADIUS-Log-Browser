@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -19,6 +21,8 @@ namespace Radius_Log_Browser
         private int searchKey;
         private Dictionary<int, ListViewItem> oldItems = new Dictionary<int, ListViewItem>();
         private Dictionary<int, ListViewItem> newItems = new Dictionary<int, ListViewItem>();
+
+        private FileSystemWatcher watcher = new FileSystemWatcher();
 
         private string Lines;
         private string Directory;
@@ -46,13 +50,34 @@ namespace Radius_Log_Browser
             lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void procesLogFile()
+        private void setProgress(int current, int total)
+        {
+            const string title = "RADIUS Log Browser";
+            if (!this.IsDisposed)
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new Action<int, int>(setProgress), new object[] { current, total });
+                    return;
+                }
+                if (current < total)
+                    Text = title + ": Parsing log entry " + current.ToString() + " of " + total.ToString();
+                else
+                    Text = title;
+            }
+        }
+
+        private void procesLogFile(bool initalrun = false)
         {
             XDocument doc = XDocument.Parse("<events>"+ Lines + "</events>");
             string classID;
-
+            int total_elements = doc.Descendants("Event").Count();
+            int current_element = 0;
+            List<ListViewItem> itemlist = new List<ListViewItem>();
             foreach (var events in doc.Descendants("Event"))
             {
+                setProgress(++current_element, total_elements);
+
                 XElement element = events.Element("Class");
                 if (element != null)
                 {
@@ -77,12 +102,8 @@ namespace Radius_Log_Browser
                         });
 
                         item.BackColor = requests[classID].getRowColor();
+                        itemlist.Add(item);
 
-                        this.Invoke(new MethodInvoker(delegate { lvLogTable.Items.Add(item); }));
-                        if (cbScroll.Checked)
-                        {
-                            this.Invoke(new MethodInvoker(delegate { lvLogTable.Items[lvLogTable.Items.Count - 1].EnsureVisible(); }));
-                        }
                     }
                     else
                     {
@@ -91,6 +112,26 @@ namespace Radius_Log_Browser
                 }
                     
             }
+
+            // Bulk adding new lines is much much much faster
+            this.Invoke(new MethodInvoker(delegate { lvLogTable.Items.AddRange(itemlist.ToArray()); }));
+            if (cbScroll.Checked)
+            {
+                this.Invoke(new MethodInvoker(delegate { lvLogTable.Items[lvLogTable.Items.Count - 1].EnsureVisible(); }));
+            }
+
+            if (initalrun)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                    lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                    RunWatcher();
+                }));
+            }
+            else
+                watcher.EnableRaisingEvents = true;
         }
 
         private void filterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,12 +195,7 @@ namespace Radius_Log_Browser
                 FileName = Path.GetFileName(ofdFile.FileName);
 
                 ReadLines(ofdFile.FileName);
-                procesLogFile();
-
-                lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                lvLogTable.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                RunWatcher();
+                Task task = Task.Run(() => procesLogFile(true));
             }
         }
 
@@ -358,7 +394,6 @@ namespace Radius_Log_Browser
 
         public void RunWatcher()
         {
-            FileSystemWatcher watcher = new FileSystemWatcher();
             watcher.Path = Directory;
             watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             watcher.Filter = FileName;
@@ -371,7 +406,8 @@ namespace Radius_Log_Browser
         private void OnChanged(object source, FileSystemEventArgs e)
         {
             ReadLines(ofdFile.FileName);
-            procesLogFile();
+            watcher.EnableRaisingEvents = false;
+            Task task = Task.Run(() => procesLogFile(false));
         }
 
         public void ReadLines(string path)
